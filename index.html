@@ -1,113 +1,966 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>iWeb5</title>
-  <meta name="description" content="一个关于个人网站与数字身份的实验。">
-  <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #1a1a1a;
-      --card-bg: #fafafa;
-      --border: #eaeaea;
-      --link: #0d6efd;
-      --shadow: rgba(0,0,0,0.08);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121212;
-        --fg: #f0f0f0;
-        --card-bg: #1e1e1e;
-        --border: #333;
-        --link: #6db3ff;
-        --shadow: rgba(0,0,0,0.3);
-      }
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
-      padding: 2rem 1rem;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      max-width: 600px;
-      width: 100%;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 1.5rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      .subtitle { color: #aaa; }
-    }
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.8rem;
-      box-shadow: 0 6px 16px var(--shadow);
-      margin-bottom: 1.5rem;
-    }
-    .links a {
-      display: block;
-      padding: 0.6rem 0;
-      color: var(--link);
-      text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-    .links a:hover {
-      opacity: 0.8;
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 2rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      footer { color: #aaa; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will Dev Studio - 专业开发解决方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* 导航栏 */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-btn.active {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        /* 首页Banner */
+        .banner {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .banner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .banner h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .banner p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: #3498db;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 关于我们 */
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #3498db;
+            margin: 15px auto 0;
+        }
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-text {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        .about-image {
+            flex: 0 0 300px;
+            height: 300px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 核心业务 */
+        .services {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #3498db;
+            font-size: 24px;
+        }
+        .service-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 项目案例 */
+        .projects {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: #ecf0f1;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .project-image {
+            height: 200px;
+            background-color: #ecf0f1;
+            overflow: hidden;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .project-info h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .project-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .project-tag {
+            background-color: #e3f2fd;
+            color: #3498db;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* 技术能力 */
+        .skills {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .skill-category {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+        .skill-list {
+            list-style: none;
+        }
+        .skill-list li {
+            padding: 8px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skill-list li::before {
+            content: '•';
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* 联系我们 */
+        .contact {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-form {
+            flex: 1;
+        }
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .info-icon {
+            color: #3498db;
+            font-size: 20px;
+            margin-top: 3px;
+        }
+        .info-text {
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #3498db;
+        }
+        .footer-col p {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* 语言切换相关 */
+        [data-lang="en"] {
+            display: none;
+        }
+        .lang-en [data-lang="zh"] {
+            display: none;
+        }
+        .lang-en [data-lang="en"] {
+            display: block;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            .about-image {
+                width: 100%;
+                max-width: 300px;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+            .nav-right {
+                gap: 15px;
+            }
+            .nav-links {
+                gap: 10px;
+            }
+            .banner h1 {
+                font-size: 32px;
+            }
+            .lang-switch {
+                gap: 5px;
+            }
+            .lang-btn {
+                padding: 3px 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>iWeb5</h1>
-      <p class="subtitle">正在构建我的数字身份 · 2025</p>
-    </header>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Will Dev Studio</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about" data-lang="zh">关于我们</a>
+                    <a href="#about" data-lang="en">About Us</a>
+                    <a href="#services" data-lang="zh">核心业务</a>
+                    <a href="#services" data-lang="en">Services</a>
+                    <a href="#projects" data-lang="zh">项目案例</a>
+                    <a href="#projects" data-lang="en">Projects</a>
+                    <a href="#skills" data-lang="zh">技术能力</a>
+                    <a href="#skills" data-lang="en">Skills</a>
+                    <a href="#contact" data-lang="zh">联系我们</a>
+                    <a href="#contact" data-lang="en">Contact</a>
+                </div>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <div class="card">
-      <div class="links">
-        <!-- 未来可替换为真实链接 -->
-        <a href="/blog">📰 博客（建设中）</a>
-        <a href="/projects">🛠️ 项目（敬请期待）</a>
-        <a href="mailto:hello@iweb5.com">✉️ 联系我</a>
-        <!-- 可选：添加 GitHub / Twitter 等 -->
-        <!-- <a href="https://github.com/chelun" target="_blank">🐙 GitHub</a> -->
-      </div>
-    </div>
+    <!-- 首页Banner -->
+    <section class="banner">
+        <div class="banner-container">
+            <h1 data-lang="zh">专注于提供创新技术解决方案</h1>
+            <h1 data-lang="en">Focused on Innovative Technical Solutions</h1>
+            <p data-lang="zh">从游戏开发到工业软件，从移动应用到硬件交互，我们为客户打造量身定制的技术产品，助力业务增长</p>
+            <p data-lang="en">From game development to industrial software, from mobile applications to hardware interaction, we create customized technical products for clients to drive business growth</p>
+            <a href="#contact" class="btn" data-lang="zh">咨询合作</a>
+            <a href="#contact" class="btn" data-lang="en">Consultation</a>
+        </div>
+    </section>
 
-    <footer>
-      © 2025 iWeb5 · 一个关于个人主权网络的实验
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <h2 class="section-title" data-lang="zh">关于我们</h2>
+            <h2 class="section-title" data-lang="en">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-lang="zh">Will Dev Studio 成立于2015年，是一家专注于全栈技术开发的创新型工作室。我们致力于将前沿技术与商业需求完美结合，为各行业客户提供从概念设计到落地实施的全流程解决方案。</p>
+                    <p data-lang="en">Founded in 2015, Will Dev Studio is an innovative studio specializing in full-stack technology development. We are committed to perfectly combining cutting-edge technology with business needs, providing clients from various industries with end-to-end solutions from conceptual design to implementation.</p>
+                    <p data-lang="zh">多年来，我们累计完成100+项目开发，服务客户涵盖游戏、教育、电商、工业制造等多个领域。我们坚持以技术创新为核心，以客户满意度为导向，不断探索技术边界，为客户创造实际价值。</p>
+                    <p data-lang="en">Over the years, we have completed more than 100 projects, serving clients in gaming, education, e-commerce, industrial manufacturing and other fields. We adhere to technological innovation as the core and customer satisfaction as the orientation, constantly exploring technical boundaries to create real value for customers.</p>
+                    <p data-lang="zh">核心优势：快速响应需求、灵活调整方案、严格把控质量、持续提供售后支持。</p>
+                    <p data-lang="en">Core advantages: Quick response to needs, flexible adjustment of solutions, strict quality control, and continuous after-sales support.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/300" alt="工作室环境" data-lang="zh">
+                    <img src="https://via.placeholder.com/300" alt="Studio Environment" data-lang="en">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心业务 -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <h2 class="section-title" data-lang="zh">核心业务</h2>
+            <h2 class="section-title" data-lang="en">Core Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 data-lang="zh">游戏开发（VR/AR）</h3>
+                    <h3 data-lang="en">Game Development (VR/AR)</h3>
+                    <p data-lang="zh">专注于VR/AR游戏开发，打造沉浸式交互体验，支持多平台设备适配，提供从策划到上线的全流程服务。</p>
+                    <p data-lang="en">Specializing in VR/AR game development, creating immersive interactive experiences, supporting multi-platform device adaptation, and providing full-process services from planning to launch.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 data-lang="zh">网站开发</h3>
+                    <h3 data-lang="en">Website Development</h3>
+                    <p data-lang="zh">定制化商城、论坛等各类网站开发，注重用户体验与性能优化，支持多终端适配与支付系统集成。</p>
+                    <p data-lang="en">Customized development of e-commerce, forums and other websites, focusing on user experience and performance optimization, supporting multi-terminal adaptation and payment system integration.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 data-lang="zh">教育培训软件</h3>
+                    <h3 data-lang="en">Education & Training Software</h3>
+                    <p data-lang="zh">开发在线学习平台、智慧课堂系统，实现直播授课、作业管理、学情分析等核心功能，提升教学效率。</p>
+                    <p data-lang="en">Developing online learning platforms and smart classroom systems, realizing core functions such as live teaching, homework management, and learning situation analysis to improve teaching efficiency.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 data-lang="zh">工业软件制作</h3>
+                    <h3 data-lang="en">Industrial Software Production</h3>
+                    <p data-lang="zh">提供工业生产管理、设备监控等定制化软件解决方案，助力企业实现数字化转型与效率提升。</p>
+                    <p data-lang="en">Providing customized software solutions for industrial production management and equipment monitoring to help enterprises achieve digital transformation and efficiency improvement.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 data-lang="zh">移动应用开发</h3>
+                    <h3 data-lang="en">Mobile App Development</h3>
+                    <p data-lang="zh">涵盖旅游、工具等多领域APP开发，支持iOS/Android双平台，提供上架指导与后续维护服务。</p>
+                    <p data-lang="en">Covering app development in various fields such as tourism and tools, supporting iOS/Android dual platforms, providing launch guidance and follow-up maintenance services.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3 data-lang="zh">硬件交互开发</h3>
+                    <h3 data-lang="en">Hardware Interaction Development</h3>
+                    <p data-lang="zh">基于Arduino等平台实现软硬件交互，开发智能家居、体感设备等创新产品，拓展技术应用场景。</p>
+                    <p data-lang="en">Realizing software and hardware interaction based on Arduino and other platforms, developing innovative products such as smart home and somatosensory devices, and expanding technical application scenarios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目案例 -->
+    <section class="projects" id="projects">
+        <div class="section-container">
+            <h2 class="section-title" data-lang="zh">项目案例</h2>
+            <h2 class="section-title" data-lang="en">Project Cases</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-lang="zh">全部案例</button>
+                <button class="filter-btn active" data-lang="en">All Projects</button>
+                <button class="filter-btn" data-lang="zh">游戏开发</button>
+                <button class="filter-btn" data-lang="en">Game Development</button>
+                <button class="filter-btn" data-lang="zh">网站应用</button>
+                <button class="filter-btn" data-lang="en">Website Apps</button>
+                <button class="filter-btn" data-lang="zh">移动应用</button>
+                <button class="filter-btn" data-lang="en">Mobile Apps</button>
+                <button class="filter-btn" data-lang="zh">硬件交互</button>
+                <button class="filter-btn" data-lang="en">Hardware Interaction</button>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/350x200?text=VR游戏项目" alt="VR冒险游戏" data-lang="zh">
+                        <img src="https://via.placeholder.com/350x200?text=VR Game Project" alt="VR Adventure Game" data-lang="en">
+                    </div>
+                    <div class="project-info">
+                        <h3 data-lang="zh">《秘境探险》VR游戏</h3>
+                        <h3 data-lang="en">"Mystic Adventure" VR Game</h3>
+                        <p data-lang="zh">支持多设备的沉浸式冒险游戏，包含10+关卡设计与创新交互模式，上线后获Steam特别好评。</p>
+                        <p data-lang="en">Multi-device supported immersive adventure game with 10+ level designs and innovative interaction modes, receiving "Very Positive" reviews on Steam after launch.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">VR/AR</span>
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">C#</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/350x200?text=电商网站" alt="服装品牌电商" data-lang="zh">
+                        <img src="https://via.placeholder.com/350x200?text=E-commerce Website" alt="Luxury Fashion E-commerce" data-lang="en">
+                    </div>
+                    <div class="project-info">
+                        <h3 data-lang="zh">轻奢服装品牌电商平台</h3>
+                        <h3 data-lang="en">Luxury Fashion E-commerce Platform</h3>
+                        <p data-lang="zh">集商品展示、会员管理、多渠道支付于一体的全功能电商系统，上线3个月交易额突破500万。</p>
+                        <p data-lang="en">A full-featured e-commerce system integrating product display, member management, and multi-channel payment, with transaction volume exceeding 5 million RMB within 3 months of launch.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Vue</span>
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">E-commerce</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/350x200?text=教育APP" alt="智慧课堂系统" data-lang="zh">
+                        <img src="https://via.placeholder.com/350x200?text=Education App" alt="Smart Classroom System" data-lang="en">
+                    </div>
+                    <div class="project-info">
+                        <h3 data-lang="zh">中小学智慧课堂系统</h3>
+                        <h3 data-lang="en">K-12 Smart Classroom System</h3>
+                        <p data-lang="zh">覆盖20所学校的在线教学平台，支持直播互动、作业批改与学情分析，教师备课效率提升40%。</p>
+                        <p data-lang="en">An online teaching platform covering 20 schools, supporting live interaction, homework correction and learning analysis, improving teachers' lesson preparation efficiency by 40%.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">Education</span>
+                            <span class="project-tag">Live Streaming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn" data-lang="zh">查看更多案例</button>
+                <button class="btn" data-lang="en">View More Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术能力 -->
+    <section class="skills" id="skills">
+        <div class="section-container">
+            <h2 class="section-title" data-lang="zh">技术能力</h2>
+            <h2 class="section-title" data-lang="en">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 data-lang="zh">编程语言</h3>
+                    <h3 data-lang="en">Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li data-lang="zh">C#（Unity游戏开发）</li>
+                        <li data-lang="en">C# (Unity Game Development)</li>
+                        <li data-lang="zh">Java（跨平台应用开发）</li>
+                        <li data-lang="en">Java (Cross-platform Application Development)</li>
+                        <li data-lang="zh">Rust（系统级编程）</li>
+                        <li data-lang="en">Rust (System-level Programming)</li>
+                        <li data-lang="zh">PHP（服务器端开发）</li>
+                        <li data-lang="en">PHP (Server-side Development)</li>
+                        <li data-lang="zh">Vue/UniApp（前端框架）</li>
+                        <li data-lang="en">Vue/UniApp (Frontend Frameworks)</li>
+                        <li data-lang="zh">C++（高性能场景开发）</li>
+                        <li data-lang="en">C++ (High-performance Scenario Development)</li>
+                        <li data-lang="zh">TypeScript/JavaScript</li>
+                        <li data-lang="en">TypeScript/JavaScript</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-lang="zh">开发框架与工具</h3>
+                    <h3 data-lang="en">Frameworks & Tools</h3>
+                    <ul class="skill-list">
+                        <li data-lang="zh">Unity 3D（游戏引擎）</li>
+                        <li data-lang="en">Unity 3D (Game Engine)</li>
+                        <li data-lang="zh">Spring Boot（Java框架）</li>
+                        <li data-lang="en">Spring Boot (Java Framework)</li>
+                        <li data-lang="zh">React（前端框架）</li>
+                        <li data-lang="en">React (Frontend Framework)</li>
+                        <li data-lang="zh">MySQL/PostgreSQL（数据库）</li>
+                        <li data-lang="en">MySQL/PostgreSQL (Databases)</li>
+                        <li data-lang="zh">Docker（容器化部署）</li>
+                        <li data-lang="en">Docker (Containerization Deployment)</li>
+                        <li data-lang="zh">Git（版本控制）</li>
+                        <li data-lang="en">Git (Version Control)</li>
+                        <li data-lang="zh">Arduino（硬件开发）</li>
+                        <li data-lang="en">Arduino (Hardware Development)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-lang="zh">平台与服务</h3>
+                    <h3 data-lang="en">Platforms & Services</h3>
+                    <ul class="skill-list">
+                        <li data-lang="zh">iOS/Android应用开发</li>
+                        <li data-lang="en">iOS/Android App Development</li>
+                        <li data-lang="zh">Steam/Quest平台适配</li>
+                        <li data-lang="en">Steam/Quest Platform Adaptation</li>
+                        <li data-lang="zh">阿里云/腾讯云服务部署</li>
+                        <li data-lang="en">Alibaba Cloud/Tencent Cloud Deployment</li>
+                        <li data-lang="zh">微信小程序开发</li>
+                        <li data-lang="en">WeChat Mini Program Development</li>
+                        <li data-lang="zh">App Store/Google Play上架</li>
+                        <li data-lang="en">App Store/Google Play Publication</li>
+                        <li data-lang="zh">支付系统集成（微信/支付宝）</li>
+                        <li data-lang="en">Payment System Integration (WeChat/Alipay)</li>
+                        <li data-lang="zh">CDN与静态资源优化</li>
+                        <li data-lang="en">CDN & Static Resource Optimization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3 data-lang="zh">项目管理能力</h3>
+                    <h3 data-lang="en">Project Management</h3>
+                    <ul class="skill-list">
+                        <li data-lang="zh">需求分析与方案设计</li>
+                        <li data-lang="en">Requirements Analysis & Solution Design</li>
+                        <li data-lang="zh">敏捷开发流程管理</li>
+                        <li data-lang="en">Agile Development Process Management</li>
+                        <li data-lang="zh">代码评审与质量控制</li>
+                        <li data-lang="en">Code Review & Quality Control</li>
+                        <li data-lang="zh">测试用例设计与执行</li>
+                        <li data-lang="en">Test Case Design & Execution</li>
+                        <li data-lang="zh">项目文档编写与维护</li>
+                        <li data-lang="en">Project Documentation & Maintenance</li>
+                        <li data-lang="zh">客户沟通与需求迭代</li>
+                        <li data-lang="en">Client Communication & Requirement Iteration</li>
+                        <li data-lang="zh">上线后技术支持与维护</li>
+                        <li data-lang="en">Post-launch Technical Support & Maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <h2 class="section-title" data-lang="zh">联系我们</h2>
+            <h2 class="section-title" data-lang="en">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-lang="zh">随时为您提供咨询服务</h3>
+                    <h3 data-lang="en">Ready to Provide Consulting Services</h3>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <p data-lang="zh">邮箱：contact@willdevstudio.com</p>
+                            <p data-lang="en">Email: contact@willdevstudio.com</p>
+                            <p data-lang="zh">工作日 9:00-18:00 内将尽快回复</p>
+                            <p data-lang="en">We will reply as soon as possible during working days 9:00-18:00</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-text">
+                            <p data-lang="zh">电话：138-XXXX-XXXX</p>
+                            <p data-lang="en">Phone: +86 138-XXXX-XXXX</p>
+                            <p data-lang="zh">周一至周五 9:00-17:30</p>
+                            <p data-lang="en">Monday to Friday 9:00-17:30</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <p data-lang="zh">线上工作室（支持远程合作）</p>
+                            <p data-lang="en">Online Studio (Support Remote Cooperation)</p>
+                            <p data-lang="zh">服务范围：全国各地区客户</p>
+                            <p data-lang="en">Service Scope: Clients from all regions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name" data-lang="zh">您的姓名</label>
+                            <label for="name" data-lang="en">Your Name</label>
+                            <input type="text" id="name" placeholder="请输入姓名" data-lang="zh">
+                            <input type="text" id="name" placeholder="Please enter your name" data-lang="en">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-lang="zh">联系邮箱</label>
+                            <label for="email" data-lang="en">Contact Email</label>
+                            <input type="email" id="email" placeholder="请输入邮箱地址" data-lang="zh">
+                            <input type="email" id="email" placeholder="Please enter your email address" data-lang="en">
+                        </div>
+                        <div class="form-group">
+                            <label for="project" data-lang="zh">项目需求</label>
+                            <label for="project" data-lang="en">Project Requirements</label>
+                            <textarea id="project" placeholder="请简要描述您的项目需求..." data-lang="zh"></textarea>
+                            <textarea id="project" placeholder="Please briefly describe your project requirements..." data-lang="en"></textarea>
+                        </div>
+                        <button type="submit" class="btn" data-lang="zh">提交需求</button>
+                        <button type="submit" class="btn" data-lang="en">Submit Requirements</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h3>Will Dev Studio</h3>
+                    <p data-lang="zh">专注于技术创新与解决方案，为客户创造实际价值，助力业务增长。</p>
+                    <p data-lang="en">Focused on technological innovation and solutions, creating real value for customers and driving business growth.</p>
+                </div>
+                <div class="footer-col">
+                    <h3 data-lang="zh">业务范围</h3>
+                    <h3 data-lang="en">Service Scope</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-lang="zh">游戏开发</a><a href="#" data-lang="en">Game Development</a></li>
+                        <li><a href="#" data-lang="zh">网站建设</a><a href="#" data-lang="en">Website Construction</a></li>
+                        <li><a href="#" data-lang="zh">移动应用</a><a href="#" data-lang="en">Mobile Applications</a></li>
+                        <li><a href="#" data-lang="zh">工业软件</a><a href="#" data-lang="en">Industrial Software</a></li>
+                        <li><a href="#" data-lang="zh">硬件交互</a><a href="#" data-lang="en">Hardware Interaction</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-lang="zh">快速链接</h3>
+                    <h3 data-lang="en">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about" data-lang="zh">关于我们</a><a href="#about" data-lang="en">About Us</a></li>
+                        <li><a href="#projects" data-lang="zh">项目案例</a><a href="#projects" data-lang="en">Projects</a></li>
+                        <li><a href="#skills" data-lang="zh">技术能力</a><a href="#skills" data-lang="en">Skills</a></li>
+                        <li><a href="#contact" data-lang="zh">联系我们</a><a href="#contact" data-lang="en">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-lang="zh">关注我们</h3>
+                    <h3 data-lang="en">Follow Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-weixin"></i> <span data-lang="zh">微信公众号</span><span data-lang="en">WeChat Official Account</span></a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="fab fa-csdn"></i> <span data-lang="zh">CSDN博客</span><span data-lang="en">CSDN Blog</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang="zh">&copy; 2023 Will Dev Studio. 保留所有权利。</p>
+                <p data-lang="en">&copy; 2023 Will Dev Studio. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-  </div>
+
+    <script>
+        // 语言切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const langBtns = document.querySelectorAll('.lang-btn');
+            const html = document.documentElement;
+            
+            // 初始化语言状态
+            const savedLang = localStorage.getItem('preferredLang') || 'zh';
+            setLang(savedLang);
+            
+            // 绑定语言切换事件
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLang(lang);
+                    localStorage.setItem('preferredLang', lang);
+                });
+            });
+            
+            // 设置语言函数
+            function setLang(lang) {
+                // 更新HTML类名
+                html.className = lang === 'en' ? 'lang-en' : '';
+                
+                // 更新按钮状态
+                langBtns.forEach(btn => {
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+                
+                // 更新页面标题
+                document.title = lang === 'zh' 
+                    ? 'Will Dev Studio - 专业开发解决方案' 
+                    : 'Will Dev Studio - Professional Development Solutions';
+            }
+
+            // 项目筛选功能（仅UI展示，实际筛选需添加更多逻辑）
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 移除所有按钮的active类
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // 为当前语言的对应按钮添加active类
+                    const lang = html.classList.contains('lang-en') ? 'en' : 'zh';
+                    const siblingBtn = this.getAttribute('data-lang') === lang 
+                        ? this 
+                        : this.nextElementSibling || this.previousElementSibling;
+                    
+                    if (siblingBtn) {
+                        this.classList.add('active');
+                        siblingBtn.classList.add('active');
+                    } else {
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
