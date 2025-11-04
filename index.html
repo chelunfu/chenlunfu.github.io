@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>iWeb5</title>
+  <meta name="description" content="一个关于个人网站与数字身份的实验。">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1a1a1a;
+      --card-bg: #fafafa;
+      --border: #eaeaea;
+      --link: #0d6efd;
+      --shadow: rgba(0,0,0,0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --fg: #f0f0f0;
+        --card-bg: #1e1e1e;
+        --border: #333;
+        --link: #6db3ff;
+        --shadow: rgba(0,0,0,0.3);
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .subtitle { color: #aaa; }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      box-shadow: 0 6px 16px var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+    .links a {
+      display: block;
+      padding: 0.6rem 0;
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .links a:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 2rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      footer { color: #aaa; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>iWeb5</h1>
+      <p class="subtitle">正在构建我的数字身份 · 2025</p>
+    </header>
+
+    <div class="card">
+      <div class="links">
+        <!-- 未来可替换为真实链接 -->
+        <a href="/blog">📰 博客（建设中）</a>
+        <a href="/projects">🛠️ 项目（敬请期待）</a>
+        <a href="mailto:hello@iweb5.com">✉️ 联系我</a>
+        <!-- 可选：添加 GitHub / Twitter 等 -->
+        <!-- <a href="https://github.com/chelun" target="_blank">🐙 GitHub</a> -->
+      </div>
+    </div>
+
+    <footer>
+      © 2025 iWeb5 · 一个关于个人主权网络的实验
+    </footer>
+  </div>
+</body>
+</html>
